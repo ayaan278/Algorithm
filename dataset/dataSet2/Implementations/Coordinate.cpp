@@ -2,6 +2,8 @@
 #include "../dataSet2.h"
 #include "dataSet2.cpp"
 using namespace dataSet2;
+//TODO
+//Add the summation of id and explain the validNumbers
 vector<int> dataSet2::validNumbers = {0,1,3,6,7,8,9};
 
 Coordinate::Coordinate(){

@@ -1,3 +1,5 @@
+//TODO
+//add author name
 // conctere implementation for 'Node' class
 #include "../dataSet2.h"
 using namespace dataSet2;

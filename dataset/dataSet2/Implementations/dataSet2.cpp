@@ -1,4 +1,4 @@
-// conctere implementation for 'dataSet2' namespace
+// concrete implementation for 'dataSet2' namespace
 #include "../dataSet2.h"
 using namespace dataSet2;
 
@@ -55,6 +55,8 @@ void dataSet2::initialization(string fileName){
 void dataSet2::dataSet2MainLoop(int n){
     dataSet2::alphabeticOrder;
     dataSet2::setMap(alphabeticOrder);
+    //TODO 
+    // add csv file extension at the end of the file name
     string fileName = "dataSet2 v_0." + to_string(n);
     dataSet2::initialization(fileName);
 }
