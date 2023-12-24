@@ -1,11 +1,14 @@
-//TODO
-//add author name
-// conctere implementation for 'Node' class
-#include "../dataSet2.h"
+// concrete implementation for 'Node' class
+#include "../../Common/dataSet2.h"
 using namespace dataSet2;
 using dataSet2::Node;
 
-Node::Node(){
+/*
+@couthelloword
+@Ahmad Sobhy
+*/
+Node::Node()
+{
     Node::_NUM_OF_NODES_++;
     this->name = dataSet2::mapping(dataSet2::alphabeticOrder, Node::_NUM_OF_NODES_);
 
@@ -29,7 +32,8 @@ int Node::getTotalNum(){return _TOTAL_NUM_OF_NODES_;}
 Coordinate Node::getCoordinate(){return this->position.getCoordinate();}
 
 // Deletable
-void Node::getData(){
+void Node::getData()
+{
     cout << "Node summary " << endl;
     cout << "\t name:\t" << this->name << endl;
 
@@ -38,4 +42,3 @@ void Node::getData(){
 
     cout << "\tNode profit:\t" << this->profit << endl;
 }
-

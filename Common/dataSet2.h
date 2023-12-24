@@ -15,11 +15,16 @@ dataSet2.h:
 #include <map>
 using namespace std;
 
-namespace dataSet2{
+/*
+@couthelloword
+@Ahmad Sobhy
+*/
+namespace dataSet2
+{
     // Section 1 : Entities
     void initialization(string fileName);
 
-    // Coordinate-related declrations
+    // Coordinate-related declarations
     class Coordinate{
     private:
         int x, y, z;
@@ -33,8 +38,9 @@ namespace dataSet2{
         void getData(); // no meaningful use, for testing purposes only
     };
 
-    // Node-related declrations
-    class Node{
+    // Node-related declarations
+    class Node
+    {
     private:
         static const int  _TOTAL_NUM_OF_NODES_=20;
         inline static int _NUM_OF_NODES_;
@@ -49,17 +55,17 @@ namespace dataSet2{
         int getDegree(void);
         int getProfit(void);
         Coordinate getCoordinate(void);
-        void calulateDegree(void);
+        void calculateDegree(void);
 
         void getData(void); // no meaningful use, for testing purposes only
-        friend void dataSet2::initialization(string fileName); // friendship for facilitating accessbility
+        friend void dataSet2::initialization(string fileName); // friendship for facilitating accessability
     };
 
-    // Edge-related declrations. This class is unimplemented for now
+    // Edge-related declarations. This class is unimplemented for now
     class Edge{
     private:
         char name;
-        int cost;
+        int distance;
         pair<Node, Node> endVertices;
 
     public:
@@ -67,28 +73,33 @@ namespace dataSet2{
 
         char getName(void);
         pair<Node, Node> getEndVertices(); 
-        int calculateCost(void);
+        double calculateDistance(pair<Node, Node> Edges);
+        
+
     };
 
 
     // Section 2 : namespace dataSet2 related functions(implemented in 'dataSet2.cpp' file)
 
-    // set of vaild number for dataSet2's RNG() to use:
+    // set of valid number for dataSet2's RNG() to use:
     extern vector<int> validNumbers;
 
-    // mapping alphabit with numbers based on their order
+    // mapping alphabet with numbers based on their order
     map<int, char> alphabeticOrder;
 
     // constructor for 'alphabeticOrder' map
     void setMap(map<int, char>& instance);
 
-    // searcing within 'alphabeticOrder' map
+    // edge generator
+    Edge generateEdge();
+
+    // searching within 'alphabeticOrder' map
     char mapping(map<int, char>& instance, int n);
 
     // general purpose random number generator. operating on validNumbers
     int RNG(vector<int> validNumbers, int upperPound, int lowerPound, int a, int b, int c);
 
-    // initializor
+    // initializer
     void initialization(string fileName);
 
     // executer
