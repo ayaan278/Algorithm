@@ -30,9 +30,9 @@ namespace dataSet2{
     public:
         Coordinate();
         // setters
-        void setX(int x);
-        void setY(int y);
-        void setZ(int z);
+        void setX(int x){this->x = x;}
+        void setY(int y){this->y = y;}
+        void setZ(int z){this->z = z;}
 
         // Attributes getters
         int getXaxis();
@@ -53,7 +53,7 @@ namespace dataSet2{
 
     public:
         Node();
-        Node::Node(char name, int x, int y, int z, int profit, int degree);
+        Node(char name, int x, int y, int z, int profit, int degree);
         static int getTotalNum();
         char getName() ;
         int getDegree();
@@ -106,13 +106,16 @@ namespace dataSet2{
     void initialization(string fileName);
 
     // executer
-    void generateCoordinates(int n);
+    void generateCoordinates();
 
     // Edges developer
-    void generateEdges(int n);
+    void generateEdges(string coordinatesFile);
 
     // distince calculator
     double calculateDistance(Node& a, Node& b);
+
+    // routes generator
+    vector<Edge> generate_routes(const vector<Node> nodes);
 
 }
 # endif

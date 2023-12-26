@@ -18,7 +18,7 @@ int main(){
     cout<<"|            This is the output of the second dataset              |"<<endl;
     cout<<"|------------------------------------------------------------------|"<<endl;
     cout<<"| Enter 1 to generate random coordinates                           |"<<endl;
-    cout<<"| Enter 2 to generate edges from those coordiantes                 |"<<endl;
+    cout<<"| Enter 2 to generate edges from those co-ordinates                |"<<endl;
     cout<<"|------------------------------------------------------------------|"<<endl;
 
     int choice;
@@ -32,9 +32,6 @@ int main(){
             string coordinatesFile;
             cin >> coordinatesFile;
             dataSet2::generateEdges(string("../../Dataset/Dataset2/") + coordinatesFile);
-            break;
-        default:
-            cout<<"Invalid choice"<<endl;
             break;
     }
  

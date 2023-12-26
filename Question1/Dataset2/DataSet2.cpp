@@ -114,9 +114,8 @@ void dataSet2::generateEdges(string coordinatesFile)
     file2.close();
 
     // Create a vector of edges
-    
-
-
+    vector<Edge> edges;
+    edges = dataSet2::generate_routes(nodes);
 
 
 }

@@ -42,7 +42,7 @@ int dataSet2::Edge::getTotalEdges(){
 }
 
 /// Generate routes function
-vector<Edge> dataSet2::generate_routes(const vector<Node>& nodes) 
+vector<Edge> dataSet2::generate_routes(const vector<Node> nodes) 
 {
     vector<Edge> routes;
 
