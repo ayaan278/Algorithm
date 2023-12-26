@@ -65,12 +65,59 @@ void dataSet2::initialization(string fileName)
     file.close();
 } 
 
-void dataSet2::dataSet2MainLoop(int n)
+
+double dataSet2::calculateDistance(Node& node1, Node& node2)
+{
+    double distance = sqrt(
+        pow((node1.getCoordinate().getXaxis() - node2.getCoordinate().getXaxis()), 2) + 
+        pow((node1.getCoordinate().getYaxis() - node2.getCoordinate().getYaxis()), 2) + 
+        pow((node1.getCoordinate().getZaxis() - node2.getCoordinate().getZaxis()), 2));
+    return distance;
+}
+
+
+void dataSet2::generateCoordinates()
 {
     dataSet2::alphabeticOrder;
     dataSet2::setMap(alphabeticOrder);
-    string fileName = "coordinates" + to_string(n) + ".csv";
+    string fileName = "coordinates.csv";
     dataSet2::initialization(fileName);
+
 }
 
+void dataSet2::generateEdges(string coordinatesFile)
+{
+    string edgeFileName = "edges.csv";
+    fstream file;
+    ifstream file2;
+    file.open(edgeFileName, ios_base::app);
+    file2.open(coordinatesFile, ios_base::in);
+
+    vector<Node> nodes;
+    string line, word, temp; 
+
+    while (getline(file, line)) {
+        stringstream ss(line);
+
+        char name;
+        int x, y, z, profit, degree;
+
+        // Read values from the stringstream
+        ss >> name >> x >> y >> z >> profit >> degree;
+
+        // Create a new Node and store it in the vector
+        Node newNode(name, x, y, z, profit, degree);
+        nodes.push_back(newNode);
+    }
+
+    // Close the file
+    file2.close();
+
+    // Create a vector of edges
+    
+
+
+
+
+}
 

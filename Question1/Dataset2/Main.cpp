@@ -5,6 +5,7 @@
 
 using namespace dataSet2;
 using dataSet2::Node;
+using dataSet2::Edge;
 using dataSet2::validNumbers;
 
 
@@ -13,8 +14,30 @@ using dataSet2::validNumbers;
 @Ahmad Sobhy
 */
 int main(){
-    int files = 3; // defines the name of the 'csv' file we want to generate
-    dataSet2::dataSet2MainLoop(files);
+    cout<<"|------------------------------------------------------------------|"<<endl;
+    cout<<"|            This is the output of the second dataset              |"<<endl;
+    cout<<"|------------------------------------------------------------------|"<<endl;
+    cout<<"| Enter 1 to generate random coordinates                           |"<<endl;
+    cout<<"| Enter 2 to generate edges from those coordiantes                 |"<<endl;
+    cout<<"|------------------------------------------------------------------|"<<endl;
+
+    int choice;
+    cin>>choice;
+    switch(choice){
+        case 1:
+            dataSet2::generateCoordinates();
+            break;
+        case 2:
+            cout << "Enter the file name of the coordinates: ";
+            string coordinatesFile;
+            cin >> coordinatesFile;
+            dataSet2::generateEdges(string("../../Dataset/Dataset2/") + coordinatesFile);
+            break;
+        default:
+            cout<<"Invalid choice"<<endl;
+            break;
+    }
+ 
     return 0;
 }
 

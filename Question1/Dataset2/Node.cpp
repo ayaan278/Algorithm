@@ -7,6 +7,15 @@ using dataSet2::Node;
 @couthelloword
 @Ahmad Sobhy
 */
+Node::Node(char name, int x, int y, int z, int profit, int degree){
+    this->name = name;
+    this->position.setX(x);    
+    this->position.setY(y);
+    this->position.setX(x);
+    this->profit = profit;
+    this->degree = degree;
+}
+
 Node::Node()
 {
     Node::_NUM_OF_NODES_++;
