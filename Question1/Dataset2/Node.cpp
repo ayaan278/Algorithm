@@ -7,6 +7,15 @@ using dataSet2::Node;
 @couthelloword
 @Ahmad Sobhy
 */
+Node::Node(char name, int x, int y, int z, int profit, int degree){
+    this->name = name;
+    this->position.setX(x);    
+    this->position.setY(y);
+    this->position.setZ(z);
+    this->profit = profit;
+    this->degree = degree;
+}
+
 Node::Node()
 {
     Node::_NUM_OF_NODES_++;
@@ -21,7 +30,9 @@ Node::Node()
     this->degree=0;
 }
 
-char Node::getName(){return this->name;}
+char Node::getName() const {
+    return this->name;
+}
 
 int Node::getDegree(){return this->degree;}
 
@@ -29,9 +40,14 @@ int Node::getProfit(){return this->profit;}
 
 int Node::getTotalNum(){return _TOTAL_NUM_OF_NODES_;}
 
-Coordinate Node::getCoordinate(){return this->position.getCoordinate();}
+Coordinate Node::getCoordinate() const { return this->position; }
 
-// Deletable
+void Node::calculateDegree()
+{
+    this->degree++;
+}
+
+// // Deletable
 void Node::getData()
 {
     cout << "Node summary " << endl;

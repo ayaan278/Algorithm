@@ -10,17 +10,18 @@ dataSet2.h:
 #include <iostream>
 #include <random> // to operate 'RNG()'
 #include <fstream> // for writing into 'csv'
+#include <cmath>
 #include <string>
+#include <algorithm>
+#include <utility>
+#include <sstream>
 #include <vector>
 #include <map>
+#include <memory>
+#include <unordered_map> 
 using namespace std;
 
-/*
-@couthelloword
-@Ahmad Sobhy
-*/
-namespace dataSet2
-{
+namespace dataSet2{
     // Section 1 : Entities
     void initialization(string fileName);
 
@@ -29,7 +30,12 @@ namespace dataSet2
     private:
         int x, y, z;
     public:
-        Coordinate();
+        Coordinate();       
+        // setters
+        void setX(int x){this->x = x;}
+        void setY(int y){this->y = y;}
+        void setZ(int z){this->z = z;}
+
         // Attributes getters
         int getXaxis();
         int getYaxis();
@@ -38,9 +44,8 @@ namespace dataSet2
         void getData(); // no meaningful use, for testing purposes only
     };
 
-    // Node-related declarations
-    class Node
-    {
+    // Node-related decorations
+    class Node{
     private:
         static const int  _TOTAL_NUM_OF_NODES_=20;
         inline static int _NUM_OF_NODES_;
@@ -50,32 +55,38 @@ namespace dataSet2
 
     public:
         Node();
+        Node(char name, int x, int y, int z, int profit, int degree);
         static int getTotalNum();
-        char getName(void);
-        int getDegree(void);
-        int getProfit(void);
-        Coordinate getCoordinate(void);
-        void calculateDegree(void);
+        char getName() const;
+        int getDegree();
+        int getProfit();
+        Coordinate getCoordinate() const;
+        void calculateDegree();
 
-        void getData(void); // no meaningful use, for testing purposes only
+        void getData(); // no meaningful use, for testing purposes only
         friend void dataSet2::initialization(string fileName); // friendship for facilitating accessability
     };
 
     // Edge-related declarations. This class is unimplemented for now
     class Edge{
     private:
+        static const int _TOTAL_NUM_OF_EDGES_ = 54;
         char name;
-        int distance;
+        double distance;
         pair<Node, Node> endVertices;
 
     public:
         Edge();
+        Edge(char name, double distance, pair<Node, Node> endVertices);
 
-        char getName(void);
-        pair<Node, Node> getEndVertices(); 
-        double calculateDistance(pair<Node, Node> Edges);
+        // get distance
+        int getTotalEdges();
+        double getDistance() const;
+        char getName() const;
+        pair<Node, Node> getEndVertices() const;
         
-
+        // routes generator
+        vector<Edge> generateRoutes(const vector<Node>& nodes) const;
     };
 
 
@@ -90,19 +101,19 @@ namespace dataSet2
     // constructor for 'alphabeticOrder' map
     void setMap(map<int, char>& instance);
 
-    // edge generator
-    Edge generateEdge();
-
     // searching within 'alphabeticOrder' map
     char mapping(map<int, char>& instance, int n);
 
     // general purpose random number generator. operating on validNumbers
     int RNG(vector<int> validNumbers, int upperPound, int lowerPound, int a, int b, int c);
-
+    
     // initializer
     void initialization(string fileName);
 
     // executer
-    void dataSet2MainLoop(int n);
+    void generateCoordinates();
+
+    // Edges developer
+    void generateEdges(string coordinatesFile);
 }
 # endif
