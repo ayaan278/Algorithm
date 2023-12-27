@@ -1,6 +1,10 @@
 // concrete implementation for 'dataSet2' namespace
 #include "../../Common/dataSet2.h"
 using namespace dataSet2;
+using dataSet2::Node;
+using dataSet2::Edge;
+using dataSet2::Coordinate;
+#include "Edges.cpp"
 
 /*
 @couthelloword
@@ -66,16 +70,6 @@ void dataSet2::initialization(string fileName)
 } 
 
 
-double dataSet2::calculateDistance(Node& node1, Node& node2)
-{
-    double distance = sqrt(
-        pow((node1.getCoordinate().getXaxis() - node2.getCoordinate().getXaxis()), 2) + 
-        pow((node1.getCoordinate().getYaxis() - node2.getCoordinate().getYaxis()), 2) + 
-        pow((node1.getCoordinate().getZaxis() - node2.getCoordinate().getZaxis()), 2));
-    return distance;
-}
-
-
 void dataSet2::generateCoordinates()
 {
     dataSet2::alphabeticOrder;
@@ -85,25 +79,49 @@ void dataSet2::generateCoordinates()
 
 }
 
+
 void dataSet2::generateEdges(string coordinatesFile)
 {
-    string edgeFileName = "edges.csv";
+    string edgeFileName = "../../Dataset/Dataset2/edges.csv";
     fstream file;
     ifstream file2;
-    file.open(edgeFileName, ios_base::app);
+    file.open(edgeFileName, ios_base::out);
     file2.open(coordinatesFile, ios_base::in);
 
     vector<Node> nodes;
-    string line, word, temp; 
-
-    while (getline(file, line)) {
+    string line, word; 
+    while (getline(file2, line)) {
         stringstream ss(line);
 
         char name;
-        int x, y, z, profit, degree;
-
-        // Read values from the stringstream
-        ss >> name >> x >> y >> z >> profit >> degree;
+        int x, y, z, profit, degree, columnCount = 0;
+        while (getline(ss, word, ',')) {
+            switch (columnCount) {
+                case 0:
+                    name = word[0];
+                    break;
+                case 1:
+                    x = stoi(word);
+                    break;
+                case 2:
+                    y = stoi(word);
+                    break;
+                case 3:
+                    z = stoi(word);
+                    break;
+                case 4:
+                    profit = stoi(word);
+                    break;
+                case 5:
+                    degree = stoi(word);
+                    break;
+                default:
+                    // Handle the case where there are more values than expected
+                    break;
+            }
+            
+            columnCount++;
+        }
 
         // Create a new Node and store it in the vector
         Node newNode(name, x, y, z, profit, degree);
@@ -112,11 +130,20 @@ void dataSet2::generateEdges(string coordinatesFile)
 
     // Close the file
     file2.close();
-
+    
     // Create a vector of edges
     vector<Edge> edges;
-    edges = dataSet2::generate_routes(nodes);
 
+    Edge obj;
+
+    edges = obj.generateRoutes(nodes);
+
+    // Write the edges to the file
+    for (const Edge& edge : edges) {
+        file << edge.getEndVertices().first.getName()
+        << "," << edge.getEndVertices().second.getName()
+        << "," << edge.getDistance() << "," <<  endl;
+    }
 
 }
 

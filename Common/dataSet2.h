@@ -17,18 +17,19 @@ dataSet2.h:
 #include <sstream>
 #include <vector>
 #include <map>
+#include <memory>
 using namespace std;
 
 namespace dataSet2{
     // Section 1 : Entities
     void initialization(string fileName);
 
-    // Coordinate-related declrations
+    // Coordinate-related declarations
     class Coordinate{
     private:
         int x, y, z;
     public:
-        Coordinate();
+        Coordinate();       
         // setters
         void setX(int x){this->x = x;}
         void setY(int y){this->y = y;}
@@ -42,7 +43,7 @@ namespace dataSet2{
         void getData(); // no meaningful use, for testing purposes only
     };
 
-    // Node-related declrations
+    // Node-related decorations
     class Node{
     private:
         static const int  _TOTAL_NUM_OF_NODES_=20;
@@ -55,17 +56,17 @@ namespace dataSet2{
         Node();
         Node(char name, int x, int y, int z, int profit, int degree);
         static int getTotalNum();
-        char getName() ;
+        char getName() const;
         int getDegree();
         int getProfit();
-        Coordinate getCoordinate();
+        Coordinate getCoordinate() const;
         void calulateDegree();
 
         void getData(); // no meaningful use, for testing purposes only
-        friend void dataSet2::initialization(string fileName); // friendship for facilitating accessbility
+        friend void dataSet2::initialization(string fileName); // friendship for facilitating accessability
     };
 
-    // Edge-related declrations. This class is unimplemented for now
+    // Edge-related declarations. This class is unimplemented for now
     class Edge{
     private:
         static const int _TOTAL_NUM_OF_EDGES_ = 54;
@@ -75,34 +76,37 @@ namespace dataSet2{
 
     public:
         Edge();
-        Edge(char name, int distance, pair<Node, Node> endVertices);
+        Edge(char name, double distance, pair<Node, Node> endVertices);
 
         // get distance
         int getTotalEdges();
-        double getDistance();
-        char getName();
-        pair<Node, Node> getEndVertices(); 
+        double getDistance() const;
+        char getName() const;
+        pair<Node, Node> getEndVertices() const;
+        
+        // routes generator
+        vector<Edge> generateRoutes(const vector<Node>& nodes) const;
     };
 
 
     // Section 2 : namespace dataSet2 related functions(implemented in 'dataSet2.cpp' file)
 
-    // set of vaild number for dataSet2's RNG() to use:
+    // set of valid number for dataSet2's RNG() to use:
     extern vector<int> validNumbers;
 
-    // mapping alphabit with numbers based on their order
+    // mapping alphabet with numbers based on their order
     map<int, char> alphabeticOrder;
 
     // constructor for 'alphabeticOrder' map
     void setMap(map<int, char>& instance);
 
-    // searcing within 'alphabeticOrder' map
+    // searching within 'alphabeticOrder' map
     char mapping(map<int, char>& instance, int n);
 
     // general purpose random number generator. operating on validNumbers
     int RNG(vector<int> validNumbers, int upperPound, int lowerPound, int a, int b, int c);
     
-    // initializor
+    // initializer
     void initialization(string fileName);
 
     // executer
@@ -110,12 +114,5 @@ namespace dataSet2{
 
     // Edges developer
     void generateEdges(string coordinatesFile);
-
-    // distince calculator
-    double calculateDistance(Node& a, Node& b);
-
-    // routes generator
-    vector<Edge> generate_routes(const vector<Node> nodes);
-
 }
 # endif
