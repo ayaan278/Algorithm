@@ -42,6 +42,11 @@ int Node::getTotalNum(){return _TOTAL_NUM_OF_NODES_;}
 
 Coordinate Node::getCoordinate() const { return this->position; }
 
+void Node::calculateDegree()
+{
+    this->degree++;
+}
+
 // // Deletable
 void Node::getData()
 {

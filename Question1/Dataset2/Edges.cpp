@@ -49,7 +49,36 @@ double calculateDistance(const Node& node1, const Node& node2)
         pow((node1.getCoordinate().getZaxis() - node2.getCoordinate().getZaxis()), 2));
     return distance;
 }
-// Generate a function to filter the duplicate values
+
+void filterRoutes(vector<Edge>& routes, int desired_routes, 
+                    int min_degree, int max_degree)
+{
+    // remove the duplicates routes that have vertices in reverse order
+    routes.erase(remove_if(routes.begin(), routes.end(), 
+        [](const Edge& route) { 
+            return route.getEndVertices().first.getName() > route.getEndVertices().second.getName(); 
+        }), routes.end());
+
+    // Sort the routes based on distance
+    sort(routes.begin(), routes.end(), 
+        [](const Edge& a, const Edge& b) { 
+            return a.getDistance() < b.getDistance();
+    });
+
+    // Remove the routes that have a degree less than the minimum degree and filter only the desired number of routes
+    routes.erase(remove_if(routes.begin(), routes.end(), 
+        [&min_degree, &max_degree](const Edge& route) { 
+            return route.getEndVertices().first.getDegree() < min_degree || 
+                    route.getEndVertices().second.getDegree() < min_degree &&
+                    route.getEndVertices().first.getDegree() > max_degree || 
+                    route.getEndVertices().second.getDegree() > max_degree; 
+        }), routes.end());
+
+
+    // Make only the desired number of routes
+    routes.erase(routes.begin() + desired_routes, routes.end());
+
+}
 
 // Generate routes function
 vector<Edge> Edge::generateRoutes(const vector<Node>& nodes) const
@@ -60,15 +89,15 @@ vector<Edge> Edge::generateRoutes(const vector<Node>& nodes) const
     // Define the desired number of routes
     int desired_routes = 54;
 
-    // Ensure each node connects to at least 3 other nodes
+    // Define minimum number of nodes connected to each node
+    int min_degree = 3;
+
+    // Define maximum number of nodes connected to each node
+    int max_degree = 5;
+
+    //Generate all possible routes
     for (const Node& node : nodes) 
     {
-        // Calculate how many connections are needed to reach a total of 54 routes
-        int remaining_connections = max(3, desired_routes - static_cast<int>(routes.size()));
-
-        // Limit the maximum number of connections from each node to 5
-        int num_connections = min(remaining_connections, 5);
-
         // Connect the node to the closest nodes based on distance
         vector<Node> connected_Nodes = nodes;
 
@@ -92,8 +121,11 @@ vector<Edge> Edge::generateRoutes(const vector<Node>& nodes) const
 
             // Check if the route already exists
             routes.push_back(route); 
-        }
+        }       
     }
+
+    // Filter the duplicate routes
+    filterRoutes(routes, desired_routes, min_degree, max_degree);
 
     return routes;
 }

@@ -18,6 +18,7 @@ dataSet2.h:
 #include <vector>
 #include <map>
 #include <memory>
+#include <unordered_map> 
 using namespace std;
 
 namespace dataSet2{
@@ -60,7 +61,7 @@ namespace dataSet2{
         int getDegree();
         int getProfit();
         Coordinate getCoordinate() const;
-        void calulateDegree();
+        void calculateDegree();
 
         void getData(); // no meaningful use, for testing purposes only
         friend void dataSet2::initialization(string fileName); // friendship for facilitating accessability

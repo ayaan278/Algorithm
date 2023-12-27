@@ -145,5 +145,12 @@ void dataSet2::generateEdges(string coordinatesFile)
         << "," << edge.getDistance() << "," <<  endl;
     }
 
+    // Close the file
+    file.close();
+
+    cout<<"|------------------------------------------------------------------|"<<endl;
+    cout<<"|            The edges have been generated successfully            |"<<endl;
+    cout<<"|------------------------------------------------------------------|"<<endl;
+
 }
 
