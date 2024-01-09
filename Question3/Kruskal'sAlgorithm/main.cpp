@@ -101,7 +101,7 @@ vector<Edge> KruskalMST(vector<Edge>& edges, int V) {
 int main() {
     vector<Edge> edges;
     map<char, int> vertexIndexMap;
-    string filePath = "/Users/salahmoh/Documents/GitHub/Algorithm/Dataset/DataSet2/edges.csv";
+    string filePath = "../../Dataset/DataSet2/edges.csv";
     loadEdgesFromFile(edges, filePath, vertexIndexMap);
 
     int V = vertexIndexMap.size(); // I'm determining the number of vertices here
