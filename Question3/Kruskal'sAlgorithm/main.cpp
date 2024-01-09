@@ -6,6 +6,7 @@
 #include <unordered_map>
 #include <map>
 
+
 using namespace std;
 
 // Structure to represent an edge
@@ -96,6 +97,7 @@ int main() {
     Graph graph;
     unordered_map<char, int> vertexMap;
     ifstream file("/Users/salahmoh/Documents/GitHub/Algorithm/Dataset/DataSet2/edges.csv");  // Update with the actual file path
+    ofstream outputFile("/Users/salahmoh/Documents/GitHub/Algorithm/SolutionData/kruskal.csv"); // Replace with your desired output file path
 
     if (!file.is_open()) {
         cout << "Error opening file" << endl;
@@ -154,7 +156,11 @@ int main() {
             if (pair.second == edge.dest) destChar = pair.first;
         }
         cout << srcChar << " -- " << destChar << " == " << edge.weight << endl;
+        outputFile << srcChar << "," << destChar << "," << edge.weight << "\n";
+
     }
+    outputFile.close();
+
 
     return 0;
 }
