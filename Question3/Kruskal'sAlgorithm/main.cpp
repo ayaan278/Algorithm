@@ -1,119 +1,162 @@
 #include <iostream>
-#include <fstream>
 #include <vector>
-#include <algorithm>
-#include <string>
+#include <fstream>
 #include <sstream>
+#include <algorithm>
+#include <unordered_map>
 #include <map>
 
 using namespace std;
 
+// Structure to represent an edge
 struct Edge {
-    int src, dest;
+    char src, dest;
     double weight;
-    Edge(int s, int d, double w) : src(s), dest(d), weight(w) {}
 };
 
-bool compareByWeight(const Edge& a, const Edge& b) {
+// Comparator for sorting edges based on their weight
+bool compareEdge(Edge a, Edge b) {
     return a.weight < b.weight;
 }
 
+// Structure to represent a subset for union-find
 struct subset {
     int parent;
     int rank;
 };
 
-int find(vector<subset>& subsets, int i) {
-    if (subsets[i].parent != i) {
-        subsets[i].parent = find(subsets, subsets[i].parent);
+// Structure to represent a graph
+struct Graph {
+    int V; // Number of vertices
+    vector<Edge> edges;
+
+    // Function to add an edge to the graph
+    void addEdge(char src, char dest, double weight) {
+        Edge edge = {src, dest, weight};
+        edges.push_back(edge);
     }
+};
+
+// A utility function to find set of an element i (uses path compression)
+int find(subset subsets[], int i) {
+    if (subsets[i].parent != i)
+        subsets[i].parent = find(subsets, subsets[i].parent);
+
     return subsets[i].parent;
 }
 
-void Union(vector<subset>& subsets, int x, int y) {
+// A function that does union of two sets of x and y (uses union by rank)
+void Union(subset subsets[], int x, int y) {
     int xroot = find(subsets, x);
     int yroot = find(subsets, y);
-    if (subsets[xroot].rank < subsets[yroot].rank) {
+
+    if (subsets[xroot].rank < subsets[yroot].rank)
         subsets[xroot].parent = yroot;
-    } else if (subsets[xroot].rank > subsets[yroot].rank) {
+    else if (subsets[xroot].rank > subsets[yroot].rank)
         subsets[yroot].parent = xroot;
-    } else {
+    else {
         subsets[yroot].parent = xroot;
         subsets[xroot].rank++;
     }
 }
 
-void loadEdgesFromFile(vector<Edge>& edges, const string& filePath, map<char, int>& vertexIndexMap) {
-    ifstream file(filePath);
-    if (!file) {
-        cerr << "I can't open the file: " << filePath << endl;
-        return;
-    }
-    string line;
-    int index = 0; // I'll use this index for the vertices
-    while (getline(file, line)) {
-        istringstream iss(line);
-        char srcChar, destChar;
-        double weight;
-        char comma;
+// Function to construct MST using Kruskal's algorithm
+vector<Edge> KruskalMST(Graph &graph) {
+    vector<Edge> mst;
+    int V = graph.V;
+    sort(graph.edges.begin(), graph.edges.end(), compareEdge);
 
-        iss >> srcChar >> comma >> destChar >> comma >> weight;
-        if (iss.fail()) {
-            cerr << "I encountered an error parsing the line: " << line << endl;
-            iss.clear();
-            continue;
-        }
-
-        // I'm mapping the vertices to indices here
-        if (vertexIndexMap.find(srcChar) == vertexIndexMap.end()) {
-            vertexIndexMap[srcChar] = index++;
-        }
-        if (vertexIndexMap.find(destChar) == vertexIndexMap.end()) {
-            vertexIndexMap[destChar] = index++;
-        }
-
-        edges.push_back(Edge(vertexIndexMap[srcChar], vertexIndexMap[destChar], weight));
-    }
-    file.close();
-}
-
-vector<Edge> KruskalMST(vector<Edge>& edges, int V) {
-    sort(edges.begin(), edges.end(), compareByWeight);
-    vector<subset> subsets(V);
+    subset *subsets = new subset[V];
     for (int v = 0; v < V; ++v) {
         subsets[v].parent = v;
         subsets[v].rank = 0;
     }
 
-    vector<Edge> result;
-    for (Edge& e : edges) {
-        int x = find(subsets, e.src);
-        int y = find(subsets, e.dest);
+    int e = 0;
+    int i = 0;
+    while (e < V - 1 && i < graph.edges.size()) {
+        Edge next_edge = graph.edges[i++];
+
+        int x = find(subsets, next_edge.src);
+        int y = find(subsets, next_edge.dest);
 
         if (x != y) {
-            result.push_back(e);
+            mst.push_back(next_edge);
             Union(subsets, x, y);
+            e++;
         }
     }
-    return result;
+
+    delete[] subsets;
+    return mst;
 }
 
+// Main function
 int main() {
-    vector<Edge> edges;
-    map<char, int> vertexIndexMap;
-    string filePath = "../../Dataset/DataSet2/edges.csv";
-    loadEdgesFromFile(edges, filePath, vertexIndexMap);
+    Graph graph;
+    unordered_map<char, int> vertexMap;
+    ifstream file("/Users/salahmoh/Documents/GitHub/Algorithm/Dataset/DataSet2/edges.csv");  // Update with the actual file path
 
-    int V = vertexIndexMap.size(); // I'm determining the number of vertices here
+    if (!file.is_open()) {
+        cout << "Error opening file" << endl;
+        return 1;
+    }
 
-    vector<Edge> mst = KruskalMST(edges, V);
+    string line;
+    // Read edges from CSV file and populate the graph and vertexMap
+    while (getline(file, line)) {
+        stringstream ss(line);
+        char src, dest, comma;
+        double weight;
 
-    cout << "Minimum Spanning Tree:" << endl;
-    for (const Edge& e : mst) {
-        char srcChar = 'A' + e.src; // I'm assuming vertices start from 'A'
-        char destChar = 'A' + e.dest; // I'll adjust this if the vertices have different labels
-        cout << srcChar << " -- " << destChar << " == " << e.weight << endl;
+        if (ss >> src >> comma && comma == ',' &&
+            ss >> dest >> comma && comma == ',' &&
+            ss >> weight) {
+            cout << "Read edge: " << src << " -- " << dest << " == " << weight << endl;
+
+            if (vertexMap.find(src) == vertexMap.end()) {
+                vertexMap[src] = vertexMap.size();
+            }
+            if (vertexMap.find(dest) == vertexMap.end()) {
+                vertexMap[dest] = vertexMap.size();
+            }
+
+            int srcIndex = vertexMap[src];
+            int destIndex = vertexMap[dest];
+
+            // Add edge to the graph using integer indices
+            graph.addEdge(srcIndex, destIndex, weight);
+            cout << "Added edge: " << srcIndex << " -- " << destIndex << " == " << weight << endl;
+        } else {
+            cout << "Failed to parse line: " << line << endl;
+        }
+    }
+
+    cout << "Vertex Map:" << endl;
+    for (const auto &pair : vertexMap) {
+        cout << pair.first << " -> " << pair.second << endl;
+    }
+
+    // Set the number of vertices in the graph
+    graph.V = vertexMap.size();
+
+    // Find the MST using Kruskal's algorithm
+    vector<Edge> mst = KruskalMST(graph);
+
+    // Display the edges of the MST
+    cout << "Edges in the constructed MST:" << endl;
+    for (const Edge &edge : mst) {
+        // Convert indices back to character vertices for display
+        char srcChar = ' '; // Initialize with a placeholder
+        char destChar = ' ';
+        for (const auto &pair : vertexMap) {
+            if (pair.second == edge.src) srcChar = pair.first;
+            if (pair.second == edge.dest) destChar = pair.first;
+        }
+        cout << srcChar << " -- " << destChar << " == " << edge.weight << endl;
     }
 
     return 0;
 }
+
+
