@@ -2,96 +2,189 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
-#include <unordered_map>
+#include <list>
 #include <queue>
 #include <limits>
+#include <iomanip>
+#include <stack> 
 
 using namespace std;
 
-// Structure to represent an edge in the graph
-struct Edge {
-    char source, destination;
-    double weight;
+#define INF numeric_limits<double>::infinity()
 
-    Edge(char src, char dest, double w) : source(src), destination(dest), weight(w) {}
+struct Edge 
+{
+    char name;
+    char destination;
+    double distance;
 };
 
-// Function to read edges from a CSV file
-vector<Edge> readEdges(const string& filename) {
-    vector<Edge> edges;
-    ifstream file(filename);
+class Graph 
+{
+    // No. of vertices
+    int V;
+    list<pair<int, double>>* adj;
 
-    if (file.is_open()) {
-        string line;
-        while (getline(file, line)) {
-            stringstream ss(line);
-            char src, dest;
-            double weight;
-            char comma;
+    public:
+        Graph();
+        Graph(int V);
+        void addEdge(char u, char v, double w);
+        void shortestPath(char src);
+};
 
-            ss >> src >> comma >> dest >> comma >> weight;
-            edges.emplace_back(src, dest, weight);
-        }
-        file.close();
-    }
+Graph::Graph(){}
 
-    return edges;
+Graph::Graph(int V) 
+{
+    this->V = V;
+    adj = new list<pair<int, double>>[V];
 }
 
-// Dijkstra's Algorithm to find the shortest paths
-void dijkstra(const vector<Edge>& edges, char start, unordered_map<char, double>& distance) {
-    priority_queue<pair<double, char>, vector<pair<double, char>>, greater<pair<double, char>>> pq;
-    distance[start] = 0;
-    pq.push({0, start});
+void Graph::addEdge(char u, char v, double w) 
+{
+    adj[u - 'A'].push_back(make_pair(v - 'A', w));
+    adj[v - 'A'].push_back(make_pair(u - 'A', w));
+}
 
-    while (!pq.empty()) {
-        char current = pq.top().second;
+void Graph::shortestPath(char src) 
+{
+    priority_queue<pair<double, int>, 
+        vector<pair<double, int>>, 
+        greater<pair<double, int>>> pq;
+
+    vector<double> dist(V, INF);
+    // Parent array to store the shortest path
+    vector<int> parent(V, -1); 
+    pq.push(make_pair(0.0, src - 'A'));
+    dist[src - 'A'] = 0.0;
+
+    while (!pq.empty()) 
+    {
+        int u = pq.top().second;
         double currentDist = pq.top().first;
         pq.pop();
 
-        for (const Edge& edge : edges) {
-            if (edge.source == current) {
-                char neighbor = edge.destination;
-                double newDist = currentDist + edge.weight;
+        // If the popped vertex has already been processed, skip
+        if (currentDist > dist[u]) 
+        {
+            continue;
+        }
 
-                if (newDist < distance[neighbor]) {
-                    distance[neighbor] = newDist;
-                    pq.push({newDist, neighbor});
-                }
+        for (auto& neighbor : adj[u]) 
+        {
+            int v = neighbor.first;
+            double distance = neighbor.second;
+
+            if (dist[v] > dist[u] + distance) 
+            {
+                dist[v] = dist[u] + distance;
+                parent[v] = u; // Update the parent for the shortest path
+                pq.push(make_pair(dist[v], v));
             }
         }
     }
+
+    ofstream outputFile("../../Output/Dijkstra's_Output.csv");
+    ofstream outputFile2("../../Output/Dijkstra's_Visualization.csv");
+
+    outputFile << "Starting station: " << "A" << endl;
+    cout << "Starting station: " << src << endl;
+
+
+    for (int i = 1; i < V; ++i) 
+    {
+        cout << char(i + 'A') << ",";
+        outputFile << char(i + 'A') << ",";
+
+        stack<char> route;
+        int currentVertex = i;
+
+        // Build the route stack
+        while (currentVertex != -1) 
+        {
+            route.push(char(currentVertex + 'A'));
+            currentVertex = parent[currentVertex];
+        }
+
+        // Output the route to the file
+        char prevNode = route.top();
+        route.pop();
+
+        // Output the route to the file
+        while (!route.empty()) 
+        {
+            char currentNode = route.top();
+            outputFile2 << prevNode << ',' << currentNode << endl;
+            outputFile << currentNode;
+            cout << currentNode;
+
+            prevNode = currentNode;
+
+            route.pop();
+            if (!route.empty()) 
+            {
+                cout << " -> ";
+                outputFile << " -> ";
+            }
+        }
+
+        // Output the distance to the file
+        outputFile << "," << fixed << setprecision(2) << dist[i] << endl;
+        cout << "," << fixed << setprecision(2) << dist[i] << endl;
+    }
+
+
+    outputFile.close();
+    outputFile2.close();
 }
 
 int main() {
-    // Replace "your_sample_edges.csv" with the actual filename
-    string filename = "../../Dataset/Dataset2/edges.csv";
+    // Read the file from the Edges Class
+    vector<Edge> edges;
+    ifstream file("../../Dataset/DataSet2/edges.csv");
+    if (file.is_open()) 
+    {
+        string line;
+        while (getline(file, line)) 
+        {
+            stringstream ss(line);
+            char name, destination, comma;
+            double distance;
+
+            if (ss >> name >> comma && comma == ',' &&
+                ss >> destination >> comma && comma == ',' && 
+                ss >> distance) 
+            {
+                edges.push_back({name, destination, distance});
+            } 
+            else 
+            {
+                cout << "Failed to parse line: " << line << endl;
+            }
+        }
+    } 
+    else 
+    {
+        cout << "Failed to open file" << endl;
+        return 1;
+    }
+
+    file.close();
+
+    // Get the starting station
     char startStation = 'A';
 
-    // Read edges from the CSV file
-    vector<Edge> edges = readEdges(filename);
+    // Create the graph and add edges
+    int numVertices = 20;
+    Graph g(numVertices);
 
-    // Find the unique stations in the graph
-    unordered_map<char, bool> stations;
-    for (const Edge& edge : edges) {
-        stations[edge.source] = true;
-        stations[edge.destination] = true;
+    for (const auto& edge : edges) 
+    {
+        g.addEdge(edge.name, edge.destination, edge.distance);
     }
 
-    // Initialize distances to infinity for all stations
-    unordered_map<char, double> distance;
-    for (const auto& station : stations) {
-        distance[station.first] = numeric_limits<double>::infinity();
-    }
-
-    // Apply Dijkstra's Algorithm
-    dijkstra(edges, startStation, distance);
-
-    // Display the shortest distance to each station
-    cout << "Shortest distances from Station " << startStation << ":\n";
-    for (const auto& station : distance) {
-        cout << "To Station " << station.first << ": " << station.second << "\n";
-    }
+    // Find the shortest path from the starting station
+    g.shortestPath(startStation);
 
     return 0;
 }

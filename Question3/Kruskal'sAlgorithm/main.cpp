@@ -6,9 +6,7 @@
 #include <unordered_map>
 #include <map>
 
-
 using namespace std;
-
 // Structure to represent an edge
 struct Edge 
 {
@@ -124,7 +122,7 @@ int main()
 
         if (ss >> src >> comma && comma == ',' &&
             ss >> dest >> comma && comma == ',' && ss >> weight) 
-            {
+        {
             cout << "Read edge: " << src << " -- " << dest << " == " << weight << endl;
 
             if (vertexMap.find(src) == vertexMap.end()) 
@@ -141,7 +139,6 @@ int main()
 
             // Add edge to the graph using integer indices
             graph.addEdge(srcIndex, destIndex, weight);
-            cout << "Added edge: " << srcIndex << " -- " << destIndex << " == " << weight << endl;
         } else {
             cout << "Failed to parse line: " << line << endl;
         }
@@ -162,10 +159,13 @@ int main()
     // Display the edges of the MST
     cout << "Edges in the constructed MST:" << endl;
 
+    ofstream outputFile("../../Output/Kruskal's_Output.csv");
+
     for (const Edge &edge : mst) 
     {
         // Convert indices back to character vertices for display
-        char srcChar = ' '; // Initialize with a placeholder
+        char srcChar = ' '; 
+        // Initialize with a placeholder
         char destChar = ' ';
         for (const auto &pair : vertexMap) {
             if (pair.second == edge.src) srcChar = pair.first;
@@ -177,8 +177,5 @@ int main()
     }
     outputFile.close();
 
-
     return 0;
 }
-
-

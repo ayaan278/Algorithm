@@ -17,16 +17,20 @@ dataSet2.h:
 #include <sstream>
 #include <vector>
 #include <map>
+#include <queue>
+#include <limits>
 #include <memory>
 #include <unordered_map> 
 using namespace std;
 
-namespace dataSet2{
+namespace dataSet2
+{
     // Section 1 : Entities
     void initialization(string fileName);
 
     // Coordinate-related declarations
-    class Coordinate{
+    class Coordinate
+    {
     private:
         int x, y, z;
     public:
@@ -45,7 +49,8 @@ namespace dataSet2{
     };
 
     // Node-related decorations
-    class Node{
+    class Node
+    {
     private:
         static const int  _TOTAL_NUM_OF_NODES_=20;
         inline static int _NUM_OF_NODES_;
@@ -68,7 +73,8 @@ namespace dataSet2{
     };
 
     // Edge-related declarations. This class is unimplemented for now
-    class Edge{
+    class Edge
+    {
     private:
         static const int _TOTAL_NUM_OF_EDGES_ = 54;
         char name;

@@ -17,14 +17,16 @@ using dataSet2::Coordinate;
 
 Edge::Edge(){}
 
-Edge::Edge(char name, double distance, pair<Node, Node> endVertices){
+Edge::Edge(char name, double distance, pair<Node, Node> endVertices)
+{
     this->name = name;
     this->distance = distance;
     this->endVertices = endVertices;
 }
 
 // end Vertices getter
-pair<Node, Node> Edge::getEndVertices() const {
+pair<Node, Node> Edge::getEndVertices() const 
+{
     return this->endVertices;
 }
 
@@ -36,7 +38,8 @@ double Edge::getDistance() const {return this->distance;}
 
 
 // getter for member '_TOTAL_NUM_OF_EDGES_'
-int dataSet2::Edge::getTotalEdges(){
+int dataSet2::Edge::getTotalEdges()
+{
     return _TOTAL_NUM_OF_EDGES_;
 }
 
@@ -129,3 +132,4 @@ vector<Edge> Edge::generateRoutes(const vector<Node>& nodes) const
 
     return routes;
 }
+
