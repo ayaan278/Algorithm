@@ -10,36 +10,42 @@
 using namespace std;
 
 // Structure to represent an edge
-struct Edge {
+struct Edge 
+{
     char src, dest;
     double weight;
 };
 
 // Comparator for sorting edges based on their weight
-bool compareEdge(Edge a, Edge b) {
+bool compareEdge(Edge a, Edge b) 
+{
     return a.weight < b.weight;
 }
 
 // Structure to represent a subset for union-find
-struct subset {
+struct subset 
+{
     int parent;
     int rank;
 };
 
 // Structure to represent a graph
-struct Graph {
+struct Graph 
+{
     int V; // Number of vertices
     vector<Edge> edges;
 
     // Function to add an edge to the graph
-    void addEdge(char src, char dest, double weight) {
+    void addEdge(char src, char dest, double weight) 
+    {
         Edge edge = {src, dest, weight};
         edges.push_back(edge);
     }
 };
 
 // A utility function to find set of an element i (uses path compression)
-int find(subset subsets[], int i) {
+int find(subset subsets[], int i) 
+{
     if (subsets[i].parent != i)
         subsets[i].parent = find(subsets, subsets[i].parent);
 
@@ -47,7 +53,8 @@ int find(subset subsets[], int i) {
 }
 
 // A function that does union of two sets of x and y (uses union by rank)
-void Union(subset subsets[], int x, int y) {
+void Union(subset subsets[], int x, int y) 
+{
     int xroot = find(subsets, x);
     int yroot = find(subsets, y);
 
@@ -62,7 +69,8 @@ void Union(subset subsets[], int x, int y) {
 }
 
 // Function to construct MST using Kruskal's algorithm
-vector<Edge> KruskalMST(Graph &graph) {
+vector<Edge> KruskalMST(Graph &graph) 
+{
     vector<Edge> mst;
     int V = graph.V;
     sort(graph.edges.begin(), graph.edges.end(), compareEdge);
@@ -93,33 +101,38 @@ vector<Edge> KruskalMST(Graph &graph) {
 }
 
 // Main function
-int main() {
+int main() 
+{
     Graph graph;
     unordered_map<char, int> vertexMap;
-    ifstream file("/Users/salahmoh/Documents/GitHub/Algorithm/Dataset/DataSet2/edges.csv");  // Update with the actual file path
-    ofstream outputFile("/Users/salahmoh/Documents/GitHub/Algorithm/SolutionData/kruskal.csv"); // Replace with your desired output file path
 
-    if (!file.is_open()) {
+    ifstream file("../../Dataset/DataSet2/edges.csv");  
+
+    if (!file.is_open()) 
+    {
         cout << "Error opening file" << endl;
         return 1;
     }
 
     string line;
     // Read edges from CSV file and populate the graph and vertexMap
-    while (getline(file, line)) {
+    while (getline(file, line)) 
+    {
         stringstream ss(line);
         char src, dest, comma;
         double weight;
 
         if (ss >> src >> comma && comma == ',' &&
-            ss >> dest >> comma && comma == ',' &&
-            ss >> weight) {
+            ss >> dest >> comma && comma == ',' && ss >> weight) 
+            {
             cout << "Read edge: " << src << " -- " << dest << " == " << weight << endl;
 
-            if (vertexMap.find(src) == vertexMap.end()) {
+            if (vertexMap.find(src) == vertexMap.end()) 
+            {
                 vertexMap[src] = vertexMap.size();
             }
-            if (vertexMap.find(dest) == vertexMap.end()) {
+            if (vertexMap.find(dest) == vertexMap.end()) 
+            {
                 vertexMap[dest] = vertexMap.size();
             }
 
@@ -135,7 +148,8 @@ int main() {
     }
 
     cout << "Vertex Map:" << endl;
-    for (const auto &pair : vertexMap) {
+    for (const auto &pair : vertexMap) 
+    {
         cout << pair.first << " -> " << pair.second << endl;
     }
 
@@ -147,7 +161,9 @@ int main() {
 
     // Display the edges of the MST
     cout << "Edges in the constructed MST:" << endl;
-    for (const Edge &edge : mst) {
+
+    for (const Edge &edge : mst) 
+    {
         // Convert indices back to character vertices for display
         char srcChar = ' '; // Initialize with a placeholder
         char destChar = ' ';
