@@ -32,3 +32,4 @@ void Coordinate::getData()
     cout << "y-axis = " << this->y << endl;
     cout << "z-axis = " << this->z << endl;
 }
+

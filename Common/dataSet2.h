@@ -44,30 +44,35 @@ namespace dataSet2{
         void getData(); // no meaningful use, for testing purposes only
     };
 
-    // Node-related decorations
+    // Node-related declarations
     class Node{
     private:
         static const int  _TOTAL_NUM_OF_NODES_=20;
         inline static int _NUM_OF_NODES_;
         char name;
         Coordinate position;
-        int degree, profit;
+        int weight, degree, profit;
 
     public:
         Node();
         Node(char name, int x, int y, int z, int profit, int degree);
-        static int getTotalNum();
+
+
+        // Attributes getters
         char getName() const;
-        int getDegree();
-        int getProfit();
         Coordinate getCoordinate() const;
+        int getProfit();
+        int getWeight();
+        int getDegree();
+
+        static int getTotalNum();
         void calculateDegree();
 
         void getData(); // no meaningful use, for testing purposes only
         friend void dataSet2::initialization(string fileName); // friendship for facilitating accessability
     };
 
-    // Edge-related declarations. This class is unimplemented for now
+    // Edge-related declarations
     class Edge{
     private:
         static const int _TOTAL_NUM_OF_EDGES_ = 54;
@@ -89,6 +94,10 @@ namespace dataSet2{
         vector<Edge> generateRoutes(const vector<Node>& nodes) const;
     };
 
+    // Adjacency List-related declarations. Implementation will occur in 'AdjacencyList.cpp'
+    class AdjacencyList{};
+
+
 
     // Section 2 : namespace dataSet2 related functions(implemented in 'dataSet2.cpp' file)
 
@@ -107,13 +116,22 @@ namespace dataSet2{
     // general purpose random number generator. operating on validNumbers
     int RNG(vector<int> validNumbers, int upperPound, int lowerPound, int a, int b, int c);
     
-    // initializer
+    // Nodes developer
     void initialization(string fileName);
 
-    // executer
+    // Nodes printer
     void generateCoordinates();
+
+    // distance calculator
+    double calculateDistance(const Node& node1, const Node& node2);
+
+    // Edges configurator
+    void filterRoutes(vector<Edge>& routes, int desired_routes,int min_degree, int max_degree);
 
     // Edges developer
     void generateEdges(string coordinatesFile);
+
+    // Entry point for dataSet2
+    void interface();
 }
 # endif

@@ -26,28 +26,32 @@ Node::Node()
 
     this->profit = RNG(validNumbers, 600, 0, 10, 90, 500);
 
-    // for now and until the concrete implementation of the class 'Edge' the 'degree' are set to 0
+    // The number of Edges connected to certain Node. Not to be defined at the constructor
     this->degree=0;
 }
 
-char Node::getName() const {
-    return this->name;
-}
 
-int Node::getDegree(){return this->degree;}
+// getters
 
-int Node::getProfit(){return this->profit;}
-
-int Node::getTotalNum(){return _TOTAL_NUM_OF_NODES_;}
+char Node::getName() const {return this->name;}
 
 Coordinate Node::getCoordinate() const { return this->position; }
 
+int Node::getProfit(){return this->profit;}
+
+int Node::getWeight(){return this->weight;}
+
+int Node::getDegree(){return this->degree;}
+
+int Node::getTotalNum(){return _TOTAL_NUM_OF_NODES_;}
+
+
+// // Deletable
 void Node::calculateDegree()
 {
     this->degree++;
 }
 
-// // Deletable
 void Node::getData()
 {
     cout << "Node summary " << endl;
@@ -58,3 +62,5 @@ void Node::getData()
 
     cout << "\tNode profit:\t" << this->profit << endl;
 }
+
+
