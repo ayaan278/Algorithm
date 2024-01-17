@@ -84,8 +84,8 @@ void Graph::shortestPath(char src)
         }
     }
 
-    ofstream outputFile("../../SortingOutputs/Dijkstra's_Output.csv");
-    ofstream outputFile2("../../SortingOutputs/Dijkstra's_Visualization.csv");
+    ofstream outputFile("../../Outputs/Question3/Dijkstra's_Output.csv", ios::out);
+    ofstream outputFile2("../../Outputs/Question3/Dijkstra's_Visualization.csv", ios::out);
 
     outputFile << "Starting station: " << "A" << endl;
     cout << "Starting station: " << src << endl;
