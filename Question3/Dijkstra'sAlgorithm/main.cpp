@@ -84,8 +84,8 @@ void Graph::shortestPath(char src)
         }
     }
 
-    ofstream outputFile("../../Output/Dijkstra's_Output.csv");
-    ofstream outputFile2("../../Output/Dijkstra's_Visualization.csv");
+    ofstream outputFile("../../SortingOutputs/Dijkstra's_Output.csv");
+    ofstream outputFile2("../../SortingOutputs/Dijkstra's_Visualization.csv");
 
     outputFile << "Starting station: " << "A" << endl;
     cout << "Starting station: " << src << endl;
@@ -106,11 +106,11 @@ void Graph::shortestPath(char src)
             currentVertex = parent[currentVertex];
         }
 
-        // Output the route to the file
+        // SortingOutputs the route to the file
         char prevNode = route.top();
         route.pop();
 
-        // Output the route to the file
+        // SortingOutputs the route to the file
         while (!route.empty()) 
         {
             char currentNode = route.top();
@@ -128,7 +128,7 @@ void Graph::shortestPath(char src)
             }
         }
 
-        // Output the distance to the file
+        // SortingOutputs the distance to the file
         outputFile << "," << fixed << setprecision(2) << dist[i] << endl;
         cout << "," << fixed << setprecision(2) << dist[i] << endl;
     }
@@ -141,7 +141,7 @@ void Graph::shortestPath(char src)
 int main() {
     // Read the file from the Edges Class
     vector<Edge> edges;
-    ifstream file("../../Dataset/DataSet2/edges.csv");
+    ifstream file("../../DatasetsSamples/DataSet2/edges.csv");
     if (file.is_open()) 
     {
         string line;

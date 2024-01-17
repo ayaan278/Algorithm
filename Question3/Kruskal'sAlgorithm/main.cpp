@@ -104,7 +104,7 @@ int main()
     Graph graph;
     unordered_map<char, int> vertexMap;
 
-    ifstream file("../../Dataset/DataSet2/edges.csv");  
+    ifstream file("../../DatasetsSamples/DataSet2/edges.csv");
 
     if (!file.is_open()) 
     {
@@ -159,7 +159,7 @@ int main()
     // Display the edges of the MST
     cout << "Edges in the constructed MST:" << endl;
 
-    ofstream outputFile("../../Output/Kruskal's_Output.csv");
+    ofstream outputFile("../../SortingOutputs/Kruskal's_Output.csv");
 
     for (const Edge &edge : mst) 
     {

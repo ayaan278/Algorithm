@@ -31,7 +31,7 @@ int main(){
             // cout << "Enter the file name of the coordinates: ";
             // string coordinatesFile;
             // cin >> coordinatesFile;
-            dataSet2::generateEdges("../../Dataset/Dataset2/coordinates.csv");
+            dataSet2::generateEdges("../../DatasetsSamples/Dataset2/coordinates.csv");
             break;
     }
  

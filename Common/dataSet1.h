@@ -10,7 +10,7 @@ namespace dataSet1
     inline vector<int> v1 = {1,1,9,1,3,0,2,7,9,4};
 
     // data generator
-    int craftData(string fileName, vector<int> values, long long int size);
+    int craftData(vector<int> values, long long int size);
 
     // 'csv' file reader
     vector<long long int> CSVData(const string& dataSource);

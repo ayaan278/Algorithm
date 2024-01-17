@@ -84,7 +84,7 @@ class PriorityQueue
 int main () 
 {
 // Open the CSV file
-    ifstream inputFile("../../Dataset/DataSet1/Dataset-10000.csv",ios::in);
+    ifstream inputFile("../../DatasetsSamples/DataSet1/DatasetsSamples-10000.csv",ios::in);
 
    // Check if the file is open
     if (!inputFile.is_open()) 

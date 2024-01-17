@@ -3,10 +3,10 @@ using dataSet1::v1;
 
 
 // generates the data set, prints it in a 'csv' file format
-int dataSet1::craftData(string fileName, vector<int> values, long long int size)
+int dataSet1::craftData( vector<int> values, long long int size)
 {
-    ofstream outputFile; // creating file object
-    fileName = fileName + to_string(size) + ".csv"; // label it based on the size of the data set
+    fstream outputFile; // creating file object
+    string fileName = "../../DatasetsSamples/DataSet1/Dataset-" + to_string(size) + ".csv"; // label it based on the size of the data set
     outputFile.open(fileName, ios::app);
     // if file is not open, throw an error
     if (!outputFile.is_open())
@@ -27,6 +27,7 @@ int dataSet1::craftData(string fileName, vector<int> values, long long int size)
         for (auto& i : values)
         {
             outputFile << i;
+            cout << i;
         }
         outputFile << "," << endl;
     }

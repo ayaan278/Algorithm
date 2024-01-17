@@ -1,11 +1,15 @@
 #include "../../Common/dataSet1.h"
-using namespace std;
-using dataSet1::CSVData;
+#include "./CSVProcessing.cpp"
+using namespace dataSet1;
 using dataSet1::v1;
 
 
 int main()
 {
-    dataSet1::interface();
+    long long int size;
+    cout << "Enter the size of file" << endl;
+    cin >> size;
+
+    dataSet1::craftData(v1, size);
     return 0;
 }
