@@ -32,20 +32,20 @@ vector<Item> readCSV(const string& fileName) {
         string temp;
 
         try {
-            if (!getline(ss, item.name, ',')) throw std::invalid_argument("Missing name");
-            if (!getline(ss, temp, ',')) throw std::invalid_argument("Invalid x coordinate");
+            if (!getline(ss, item.name, ',')) throw invalid_argument("Missing name");
+            if (!getline(ss, temp, ',')) throw invalid_argument("Invalid x coordinate");
             item.x = stoi(temp);
-            if (!getline(ss, temp, ',')) throw std::invalid_argument("Invalid y coordinate");
+            if (!getline(ss, temp, ',')) throw invalid_argument("Invalid y coordinate");
             item.y = stoi(temp);
-            if (!getline(ss, temp, ',')) throw std::invalid_argument("Invalid z coordinate");
+            if (!getline(ss, temp, ',')) throw invalid_argument("Invalid z coordinate");
             item.z = stoi(temp);
-            if (!getline(ss, temp, ',')) throw std::invalid_argument("Invalid profit");
+            if (!getline(ss, temp, ',')) throw invalid_argument("Invalid profit");
             item.profit = stoi(temp);
-            if (!getline(ss, temp, ',')) throw std::invalid_argument("Invalid weight");
+            if (!getline(ss, temp, ',')) throw invalid_argument("Invalid weight");
             item.weight = stoi(temp);
 
             items.push_back(item);
-        } catch (const std::invalid_argument& e) {
+        } catch (const invalid_argument& e) {
             cerr << "Invalid argument: " << e.what() << " in line: " << line << endl;
         }
     }
@@ -85,7 +85,7 @@ vector<string> knapsack(const vector<Item>& items, int maxWeight) {
 }
 
 int main() {
-    string fileName = "/Users/salahmoh/Documents/GitHub/Algorithm/DatasetsSamples/DataSet2/coordinates.csv";; // Set the correct path to your CSV file
+    string fileName = "../../DatasetsSamples/DataSet2/coordinates.csv";; // Set the correct path to your CSV file
     vector<Item> items = readCSV(fileName);
 
     int maxWeight = 800; // Maximum weight capacity of the truck
@@ -109,7 +109,6 @@ int main() {
     }
 
     cout << "Total Weight: " << totalWeight << ", Total Profit: " << totalProfit << endl;
-
 
     return 0;
 }
