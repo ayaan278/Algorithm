@@ -35,8 +35,13 @@ void dataSet1::mergeSortSetup(int fileSize, bool ascending)
     cout<< "Time taken by function: " << duration.count() << " microseconds" << endl;
 
     // writing the data outcomes into 'csv' format
-    string outputName = "../../Outputs/Question2/MergeSort" + to_string(fileSize) + ".csv";
-    
+    string outputName;
+    if(ascending){
+        outputName = "../../Outputs/Question2/MergeSort" + to_string(fileSize) + "Ascending.csv";
+    }
+    else{
+        outputName = "../../Outputs/Question2/MergeSort" + to_string(fileSize) + "Descending.csv";
+    }
     outputFile.open(outputName, ios::out);
     // if file is not open, throw an error
     if(!outputFile.is_open())
@@ -53,10 +58,10 @@ void dataSet1::mergeSortSetup(int fileSize, bool ascending)
     timeFile.close();
 }
 
-void dataSet1::merge(vector<long long>& grandSet, vector<long long>& temp, int p, int pivot, int r, bool acsending)
+void dataSet1::merge(vector<long long>& grandSet, vector<long long>& temp, int p, int pivot, int r, bool ascending)
 {
     // if the sorting is in ascending order
-    if(acsending){
+    if(ascending){
         int i, j;
         for(i=pivot+1; i>p; i--){
             temp[i -1] = grandSet[i -1];
