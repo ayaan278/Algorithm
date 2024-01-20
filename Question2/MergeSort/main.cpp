@@ -5,7 +5,7 @@
 #include "./mergeSort.cpp"
 
 int main(){
-    int size;
+    int size, orderChoice;
     //TODO
     //Correct the interface
     cout<<"|------------------------------------------------------------------|"<<endl;
@@ -19,23 +19,45 @@ int main(){
     cout<<"| Enter 0 to exit                                                  |"<<endl;
     cout<<"|------------------------------------------------------------------|"<<endl;
 
-    int choice;
-    cin>>choice;
+    cin>>size;
+    system("cls");
 
     cout<<"|------------------------------------------------------------------|"<<endl;
     cout<<"|            Enter Choice                                          |"<<endl;
     cout<<"|------------------------------------------------------------------|"<<endl;
-    cout<<"| Enter 1 for Max heap                                             |"<<endl;
-    cout<<"| Enter 2 for Min heap                                             |"<<endl;
+    cout<<"| Enter 1 for Ascending Sorting                                              |"<<endl;
+    cout<<"| Enter 2 for Descending Sorting                                             |"<<endl;
     cout<<"| Enter 0 to exit                                                  |"<<endl;
     cout<<"|------------------------------------------------------------------|"<<endl;
+    cin >> orderChoice; // not used yet
 
-    int heapChoice;
-    cin>>heapChoice;
+    switch(size){
+        case 1:
+            size = 100;
+            dataSet1::mergeSortSetup(size);
+            cout << "file have being successfully sorted" << endl;
+            break;
+        case 2:
+            size = 1000;
+            dataSet1::mergeSortSetup(size);
+            cout << "file have being successfully sorted" << endl;
+            break;
+        case 3:
+            size = 10000;
+            dataSet1::mergeSortSetup(size);
+            cout << "file have being successfully sorted" << endl;
+            break;
+        case 4:
+            size = 100000;
+            dataSet1::mergeSortSetup(size);
+            cout << "file have being successfully sorted" << endl;
+            break;
+        case 5:
+            size = 500000;
+            dataSet1::mergeSortSetup(size);
+            cout << "file have being successfully sorted" << endl;
+            break;
+    }
 
-    cout << "Enter the size of file" << endl;
-    cin >> size;
-    dataSet1::mergeSortSetup(size);
-    cout << "file have being successfully sorted" << endl;
     return 0;
 }
