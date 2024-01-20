@@ -159,7 +159,7 @@ int main()
     // Display the edges of the MST
     cout << "Edges in the constructed MST:" << endl;
 
-    ofstream outputFile("../../SortingOutputs/Kruskal's_Output.csv");
+    ofstream outputFile("../../SortingOutputs/Kruskal's_Visualization.csv");
 
     for (const Edge &edge : mst) 
     {

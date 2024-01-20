@@ -5,7 +5,7 @@ using dataSet1::v1;
 // adjusting the sorting environment for merge sort
 void dataSet1::mergeSortSetup(int fileSize){
     // locating the data source
-    string dataSource = "DatasetsSamples\\DataSet1\\Dataset-" + to_string(fileSize) + ".csv";
+    string dataSource = "../../DatasetsSamples/DataSet1/Dataset-" + to_string(fileSize) + ".csv";
 
     // reading the data from source into a vector
     vector<long long int> grandSet = CSVData(dataSource); // the data set
@@ -27,7 +27,7 @@ void dataSet1::mergeSortSetup(int fileSize){
     // writing the data outcomes into 'csv' format
     ofstream outputFile; // creating file object
 
-    string name = "Outputs\\Question2\\MergeSorted" + to_string(fileSize) + ".csv"; // label it based on the size of the data set
+    string name = "../../Outputs/Question2/MergeSort" + to_string(fileSize) + ".csv"; 
     outputFile.open(name, ios::app);
     // if file is not open, throw an error
     if(!outputFile.is_open()){
