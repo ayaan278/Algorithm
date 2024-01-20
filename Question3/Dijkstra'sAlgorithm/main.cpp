@@ -118,14 +118,6 @@ void Graph::shortestPath(char src)
             outputFile << currentNode;
             cout << currentNode;
 
-            prevNode = currentNode;
-
-            route.pop();
-            if (!route.empty()) 
-            {
-                cout << " -> ";
-                outputFile << " -> ";
-            }
         }
 
         // SortingOutputs the distance to the file
