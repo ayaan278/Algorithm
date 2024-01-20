@@ -16,13 +16,13 @@ namespace dataSet1
     vector<long long int> CSVData(const string& dataSource);
 
     // sorting starter
-    void mergeSortSetup(int fileSize);
+    void mergeSortSetup(int fileSize, bool ascending);
 
     // merge sort
-    void mergeSort(vector<long long int>& grandSet, vector<long long int>& temp, int p, int r);
+    void mergeSort(vector<long long int>& grandSet, vector<long long int>& temp, int p, int r, bool ascending);
 
     // merger
-    void merge(vector<long long int>& grandSet, vector<long long int>& temp, int p, int pivot, int r);
+    void merge(vector<long long int>& grandSet, vector<long long int>& temp, int p, int pivot, int r, bool acsending);
 
     // sorting starter
     void heapSortSetup(int fileSize);
