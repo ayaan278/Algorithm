@@ -72,7 +72,7 @@ namespace dataSet2
         friend void dataSet2::initialization(string fileName); // friendship for facilitating accessability
     };
 
-    // Edge-related declarations. This class is unimplemented for now
+    // Edge-related declarations
     class Edge
     {
     private:
@@ -121,5 +121,8 @@ namespace dataSet2
 
     // Edges developer
     void generateEdges(string coordinatesFile);
+
+    // Reading CSV file
+
 }
 # endif

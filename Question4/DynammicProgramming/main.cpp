@@ -14,17 +14,20 @@ struct Item {
     int weight;
 };
 
-vector<Item> readCSV(const string& fileName) {
+vector<Item> readCSV(const string& fileName) 
+{
     vector<Item> items;
     ifstream file(fileName);
     string line;
 
-    if (!file.is_open()) {
+    if (!file.is_open()) 
+    {
         cerr << "Error opening file: " << fileName << endl;
         return items;
     }
 
-    while (getline(file, line)) {
+    while (getline(file, line)) 
+    {
         if (line.empty()) continue; // Skip empty lines
 
         stringstream ss(line);
@@ -53,7 +56,9 @@ vector<Item> readCSV(const string& fileName) {
     file.close();
     return items;
 }
-vector<string> knapsack(const vector<Item>& items, int maxWeight) {
+
+vector<string> knapsack(const vector<Item>& items, int maxWeight) 
+{
     int n = items.size();
     vector<vector<int> > dp(n + 1, vector<int>(maxWeight + 1, 0));
 
@@ -84,7 +89,8 @@ vector<string> knapsack(const vector<Item>& items, int maxWeight) {
     return itemsSelected;
 }
 
-int main() {
+int main() 
+{
     string fileName = "../../DatasetsSamples/DataSet2/coordinates.csv";; // Set the correct path to your CSV file
     vector<Item> items = readCSV(fileName);
 
