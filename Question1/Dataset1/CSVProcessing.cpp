@@ -1,7 +1,10 @@
 #include "../../Common/dataSet1.h"
 using dataSet1::v1;
 
-
+/*
+@author 
+@Musaab2120
+*/
 // generates the data set, prints it in a 'csv' file format
 int dataSet1::craftData( vector<int> values, int size)
 {

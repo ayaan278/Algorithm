@@ -8,9 +8,6 @@ using dataSet2::Coordinate;
 
 
 /*
-@couthelloword
-@Ahmad Sobhy
-...
 @ayaan278
 @Ahmad Ayaan
 */

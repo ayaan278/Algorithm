@@ -5,7 +5,7 @@
 #include "./mergeSort.cpp"
 
 int main(){
-    int size, acsending;
+    int size, ascending;
     //TODO
     //Correct the interface
     cout<<"|------------------------------------------------------------------|"<<endl;
@@ -28,32 +28,32 @@ int main(){
     cout<<"| Enter 0 for Descending Sorting                                   |"<<endl;
     cout<<"| Enter x to exit                                                  |"<<endl;
     cout<<"|------------------------------------------------------------------|"<<endl;
-    cin >> acsending; // not used yet
+    cin >> ascending; // not used yet
 
     switch(size){
         case 1:
             size = 100;
-            dataSet1::mergeSortSetup(size, acsending);
+            dataSet1::mergeSortSetup(size, ascending);
             cout << "file have being successfully sorted" << endl;
             break;
         case 2:
             size = 1000;
-            dataSet1::mergeSortSetup(size, acsending);
+            dataSet1::mergeSortSetup(size, ascending);
             cout << "file have being successfully sorted" << endl;
             break;
         case 3:
             size = 10000;
-            dataSet1::mergeSortSetup(size, acsending);
+            dataSet1::mergeSortSetup(size, ascending);
             cout << "file have being successfully sorted" << endl;
             break;
         case 4:
             size = 100000;
-            dataSet1::mergeSortSetup(size, acsending);
+            dataSet1::mergeSortSetup(size, ascending);
             cout << "file have being successfully sorted" << endl;
             break;
         case 5:
             size = 500000;
-            dataSet1::mergeSortSetup(size, acsending);
+            dataSet1::mergeSortSetup(size, ascending);
             cout << "file have being successfully sorted" << endl;
             break;
     }

@@ -7,9 +7,14 @@
 
 using namespace std;
 
+/*
+@author 
+@SalahAlHaismawi
+@ayaan278
+*/
 struct Item {
     string name;
-    int x, y, z; // Coordinates
+    int x, y, z; 
     int profit;
     int weight;
 };
@@ -28,7 +33,7 @@ vector<Item> readCSV(const string& fileName)
 
     while (getline(file, line)) 
     {
-        if (line.empty()) continue; // Skip empty lines
+        if (line.empty()) continue; 
 
         stringstream ss(line);
         Item item;

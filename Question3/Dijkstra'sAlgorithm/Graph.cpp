@@ -11,6 +11,10 @@
 
 using namespace std;
 
+/*
+@author 
+@ayaan278
+*/
 struct Edge 
 {
     char name;
@@ -31,7 +35,6 @@ class Graph
         list<pair<int, double>>* getAdj() { return adj; }
 
         void addEdge(char u, char v, double w);
-        void shortestPath(char src);
         void readEdgesFile(const string filename, 
                         vector<Edge>& edges);
         void printGraph(const char src, 

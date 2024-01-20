@@ -2,14 +2,21 @@
 #include "../../Common/dataSet1.h"
 using dataSet1::v1;
 
+/*
+@author 
+@couthelloword
+*/
 // adjusting the sorting environment for merge sort
-void dataSet1::mergeSortSetup(int fileSize, bool ascending){
+void dataSet1::mergeSortSetup(int fileSize, bool ascending)
+{
     // locating the data source
     string dataSource = "../../DatasetsSamples/DataSet1/Dataset-" + to_string(fileSize) + ".csv";
 
     // creating the output file
     ofstream outputFile; // creating file object
-    ofstream timeFile; // creating file object
+    // writing the duration of the sorting process in its appropriate file
+    string timeName = "../../Outputs/Question2/MergeSortTime.csv";
+    ofstream timeFile(timeName, ios::app);
 
     // reading the data from source into a vector
     vector<long long int> grandSet = CSVData(dataSource); // the data set
@@ -25,12 +32,11 @@ void dataSet1::mergeSortSetup(int fileSize, bool ascending){
     auto end = chrono::high_resolution_clock::now();
     // duration
     auto duration = chrono::duration_cast<chrono::microseconds>(end - start);
-
-
+    cout<< "Time taken by function: " << duration.count() << " microseconds" << endl;
 
     // writing the data outcomes into 'csv' format
-
     string outputName = "../../Outputs/Question2/MergeSort" + to_string(fileSize) + ".csv";
+    
     outputFile.open(outputName, ios::out);
     // if file is not open, throw an error
     if(!outputFile.is_open())
@@ -42,12 +48,9 @@ void dataSet1::mergeSortSetup(int fileSize, bool ascending){
         outputFile << grandSet[i] << "," << endl;
     }
     outputFile.close();
-
-    // writing the duration of the sorting process in its appropriate file
-    string timeName = "../../Outputs/Question2/MergeSort" + to_string(fileSize) + "Time.csv";
-    timeFile.open(timeName, ios::app);
-    outputFile << to_string(fileSize) << ",\t" << duration.count() << " ms" << endl;
-
+    
+    timeFile << to_string(fileSize) << ",\t" << duration.count() << " ms" << endl;
+    timeFile.close();
 }
 
 void dataSet1::merge(vector<long long>& grandSet, vector<long long>& temp, int p, int pivot, int r, bool acsending)
