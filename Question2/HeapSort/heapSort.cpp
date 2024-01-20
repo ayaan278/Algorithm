@@ -2,6 +2,7 @@
 #include "../../Common/dataSet1.h"
 #include "../../Question1/Dataset1/CSVProcessing.cpp"
 template <typename T>
+
 class dataSet1::PriorityQueue
 {
     // vector to be the container of the priority queue
@@ -20,7 +21,7 @@ class dataSet1::PriorityQueue
             heapify_enqueue(parent_index);
         }
     }
-    // heapifying operation for enqueue
+    // heaping operation for enqueue
     void heapify_dequeue (int index)
     { // used in heapify dequeue.
         int max; // max index
@@ -85,13 +86,13 @@ public:
 // adjusting the sorting environment
 void dataSet1::heapSortSetup(int fileSize) {
     // locating the data source
-    string dataSource = "DatasetsSamples\\DataSet1\\Dataset-" + to_string(fileSize) + ".csv";
+    string dataSource = "../../DatasetsSamples/DataSet1/Dataset-" + to_string(fileSize) + ".csv";
 
     // Read data from the CSV file
     vector<long long int> inputVector = CSVData(dataSource);
 
 
-    // noting the timeframe of the sorting process
+    // noting the time frame of the sorting process
     auto start = chrono::high_resolution_clock::now();
 
     // Priority Queue operations
@@ -107,7 +108,7 @@ void dataSet1::heapSortSetup(int fileSize) {
 
     // writing the sorted data into a 'csv' file
     fstream outputfile; // file object
-    string name = "Outputs\\Question2\\HeapSorted" + to_string(fileSize) + ".csv"; // label the file
+    string name = "../../Outputs/Question2/HeapSort" + to_string(fileSize) + ".csv"; // label the file
     outputfile.open(name, ios::out);
 
     // handling the error of opening the file
