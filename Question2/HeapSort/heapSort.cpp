@@ -8,6 +8,7 @@ using dataSet1::MinPriorityQueue;
 
 namespace dataSet1
 {
+    
     // adjusting the sorting environment
     void maxHeapSortSetup(int fileSize) 
     {
