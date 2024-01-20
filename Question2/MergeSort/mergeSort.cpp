@@ -58,10 +58,10 @@ void dataSet1::mergeSortSetup(int fileSize, bool ascending)
     timeFile.close();
 }
 
-void dataSet1::merge(vector<long long>& grandSet, vector<long long>& temp, int p, int pivot, int r, bool ascending)
+void dataSet1::merge(vector<long long>& grandSet, vector<long long>& temp, int p, int pivot, int r, bool acsending)
 {
     // if the sorting is in ascending order
-    if(ascending){
+    if(acsending){
         int i, j;
         for(i=pivot+1; i>p; i--){
             temp[i -1] = grandSet[i -1];
@@ -83,24 +83,23 @@ void dataSet1::merge(vector<long long>& grandSet, vector<long long>& temp, int p
     // if the sorting is in descending order
     else{
         int i, j;
-        for (i = pivot + 1; i > p; i--) {
-            temp[i - 1] = grandSet[i - 1];
+        for(i=pivot+1; i>p; i--){
+            temp[i -1] = grandSet[i -1];
         }
 
-        for (j = pivot; j < r; j++) {
-            temp[(r + pivot) - j] = grandSet[j + 1];
+        for(j=pivot; j<r; j++){
+            temp[(r+pivot) - j] = grandSet[j + 1];
         }
 
-        i = p;
-        j = r;
-
-        for (int k = p; k <= r; k++) {
-            if (temp[i] > temp[j]) {
-                grandSet[k] = temp[j++];
-            } else {
-                grandSet[k] = temp[i--];
+        for(int k=p; k<=r; k++){
+            if(temp[j] > temp[i]){
+                grandSet[k] = temp[j--];
+            }
+            else{
+                grandSet[k] = temp[i++];
             }
         }
+
     }
 }
 
