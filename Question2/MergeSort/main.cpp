@@ -20,13 +20,12 @@ int main(){
     cout<<"|------------------------------------------------------------------|"<<endl;
 
     cin>>size;
-    system("cls");
 
     cout<<"|------------------------------------------------------------------|"<<endl;
     cout<<"|            Enter Choice                                          |"<<endl;
     cout<<"|------------------------------------------------------------------|"<<endl;
-    cout<<"| Enter 1 for Ascending Sorting                                              |"<<endl;
-    cout<<"| Enter 2 for Descending Sorting                                             |"<<endl;
+    cout<<"| Enter 1 for Ascending Sorting                                    |"<<endl;
+    cout<<"| Enter 2 for Descending Sorting                                   |"<<endl;
     cout<<"| Enter 0 to exit                                                  |"<<endl;
     cout<<"|------------------------------------------------------------------|"<<endl;
     cin >> orderChoice; // not used yet

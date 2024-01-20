@@ -28,9 +28,10 @@ void dataSet1::mergeSortSetup(int fileSize){
     ofstream outputFile; // creating file object
 
     string name = "../../Outputs/Question2/MergeSort" + to_string(fileSize) + ".csv"; 
-    outputFile.open(name, ios::app);
+    outputFile.open(name, ios::out);
     // if file is not open, throw an error
-    if(!outputFile.is_open()){
+    if(!outputFile.is_open())
+    {
         cout << "Failed to open file!!!" << endl;
     }
 
