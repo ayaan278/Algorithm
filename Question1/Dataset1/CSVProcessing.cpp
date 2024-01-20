@@ -3,7 +3,7 @@ using dataSet1::v1;
 
 
 // generates the data set, prints it in a 'csv' file format
-int dataSet1::craftData( vector<int> values, long long int size)
+int dataSet1::craftData( vector<int> values, int size)
 {
     fstream outputFile; // creating file object
     string fileName = "../../DatasetsSamples/DataSet1/Dataset-" + to_string(size) + ".csv"; // label it based on the size of the data set
@@ -21,8 +21,8 @@ int dataSet1::craftData( vector<int> values, long long int size)
         random_device rd,rnd;
         mt19937 give(rd());
         uniform_int_distribution<int>gen(1,10);
-        shuffle(values.begin(),values.end(),give);
-        values.resize(gen(rnd));
+        shuffle(values.begin(),values.end(),give); // shuffling the indexes
+        values.resize(gen(rnd)); // resizing the vector to a random size
         // writing the generated  element into the file
         for (auto& i : values)
         {
@@ -46,7 +46,7 @@ vector<long long int> dataSet1::CSVData(const string& file_path) {
 
     // if file is not open, throw an error
     if (!file.is_open()) {
-        cerr << "Error opening file: " << file_path << endl;
+        cout << "Error opening file: " << file_path << endl;
         return data;
     }
     // reading the data linearly to the vector

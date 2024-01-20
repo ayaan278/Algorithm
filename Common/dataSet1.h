@@ -10,7 +10,7 @@ namespace dataSet1
     inline vector<int> v1 = {1,1,9,1,3,0,2,7,9,4};
 
     // data generator
-    int craftData(vector<int> values, long long int size);
+    int craftData(vector<int> values, int size);
 
     // 'csv' file reader
     vector<long long int> CSVData(const string& dataSource);
@@ -24,11 +24,12 @@ namespace dataSet1
     // merger
     void merge(vector<long long int>& grandSet, vector<long long int>& temp, int p, int pivot, int r);
 
-    // heap sort
-    void heapSort();
+    // sorting starter
+    void heapSortSetup(int fileSize);
 
-    // interface
-    void interface();
+    // heap sort
+    template <typename T>
+    class PriorityQueue;
 };
 #endif // DATASET1_H
 
