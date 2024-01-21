@@ -1,6 +1,6 @@
 #include "../../Common/dataSet2.h"
-#include "./coordinate.cpp"
-#include "./node.cpp"
+#include "./Coordinate.cpp"
+#include "./Node.cpp"
 
 
 using namespace dataSet2;

@@ -4,7 +4,7 @@ using namespace dataSet2;
 using dataSet2::Node;
 using dataSet2::Edge;
 using dataSet2::Coordinate;
-#include "Edges.cpp"
+#include "./Edges.cpp"
 
 /*
 @couthelloword
