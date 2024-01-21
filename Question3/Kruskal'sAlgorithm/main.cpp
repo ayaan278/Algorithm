@@ -100,6 +100,7 @@ int main()
 
     ofstream outputFile("../../SortingOutputs/Kruskal's_Visualization.csv");
 
+    double sum = 0;
     for (const Edge &edge : mst)
     {
         // Convert indices back to character vertices for display
@@ -118,8 +119,11 @@ int main()
              << setw(6) << fixed << setprecision(2)
              << edge.weight << "         |" << endl;
         outputFile << srcChar << "," << destChar << "," << edge.weight << "\n";
+        sum += edge.weight;
     }
     outputFile.close();
+    cout << "|------------------------------|" << endl;
+    cout << "|Total weight of MST is: " << setw(6) << fixed << setprecision(2) << sum << "|" << endl;
     cout << "|------------------------------|" << endl;
 
     return 0;
