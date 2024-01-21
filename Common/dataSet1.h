@@ -25,9 +25,9 @@ namespace dataSet1
     void merge(vector<long long int>& grandSet, vector<long long int>& temp, int p, int pivot, int r, bool acsending);
 
     // sorting starter
-    void maxHeapSortSetup(int fileSize);
+    void HeapSortSetup(int fileSize,bool sortchoice);
 
-    void minHeapSortSetup(int fileSize);
+    
 
     // heap sort
     template <typename T>
