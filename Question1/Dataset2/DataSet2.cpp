@@ -59,8 +59,9 @@ char dataSet2::mapping(map<int, char>& instance, int n)
 void dataSet2::initialization(string fileName)
 {
     fstream file;
-    file.open(fileName, ios_base::app);
-    for(int i=0; i<Node::getTotalNum(); i++){
+    file.open(fileName, ios_base::out);
+    for(int i=0; i<Node::getTotalNum(); i++)
+    {
         Node newNode;
         file << newNode.getName() << "," << to_string(newNode.position.getXaxis()) 
             << "," << to_string(newNode.position.getYaxis()) << "," << to_string(newNode.position.getZaxis())
@@ -74,15 +75,14 @@ void dataSet2::generateCoordinates()
 {
     dataSet2::alphabeticOrder;
     dataSet2::setMap(alphabeticOrder);
-    string fileName = "coordinates.csv";
+    string fileName = "../../DatasetsSamples/Dataset2/coordinates.csv";
     dataSet2::initialization(fileName);
-
 }
 
 
 void dataSet2::generateEdges(string coordinatesFile)
 {
-    string edgeFileName = "../../DatasetsSamples/Dataset2/edges.csv";
+    string edgeFileName = "../../DatasetsSamples/Dataset2/edges-trial.csv";
     fstream file;
     ifstream file2;
     file.open(edgeFileName, ios_base::out);
@@ -95,39 +95,40 @@ void dataSet2::generateEdges(string coordinatesFile)
 
         char name;
         int x, y, z, profit, degree, columnCount = 0;
-        while (getline(ss, word, ',')) {
-            switch (columnCount) {
-                case 0:
-                    name = word[0];
-                    break;
-                case 1:
-                    x = stoi(word);
-                    break;
-                case 2:
-                    y = stoi(word);
-                    break;
-                case 3:
-                    z = stoi(word);
-                    break;
-                case 4:
-                    profit = stoi(word);
-                    break;
-                case 5:
-                    degree = stoi(word);
-                    break;
-                default:
-                    // Handle the case where there are more values than expected
-                    break;
+        try {
+            while (getline(ss, word, ',')) {
+                switch (columnCount) {
+                    case 0:
+                        name = word[0];
+                        break;
+                    case 1:
+                        x = stoi(word);
+                        break;
+                    case 2:
+                        y = stoi(word);
+                        break;
+                    case 3:
+                        z = stoi(word);
+                        break;
+                    case 4:
+                        profit = stoi(word);
+                        break;
+                    case 5:
+                        degree = stoi(word);
+                        break;
+                }
+                columnCount++;
             }
-            
-            columnCount++;
+        } catch (const invalid_argument& e) 
+        {
+            cerr << "Invalid argument: " << e.what() << " in line: " << line << endl;
         }
 
         // Create a new Node and store it in the vector
         Node newNode(name, x, y, z, profit, degree);
         nodes.push_back(newNode);
     }
-
+ 
     // Close the file
     file2.close();
     

@@ -114,7 +114,8 @@ vector<Edge> Edge::generateRoutes(const vector<Node>& nodes) const
                 return calculateDistance(node, a) < calculateDistance(node, b);
             });
 
-        for (Node& connected_Node : connected_Nodes) {
+        for (Node& connected_Node : connected_Nodes) 
+        {
             Edge route(node.getName(), 
                 calculateDistance(node, connected_Node), 
                 make_pair(node, connected_Node));

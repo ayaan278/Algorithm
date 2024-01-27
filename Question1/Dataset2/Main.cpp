@@ -29,9 +29,6 @@ int main(){
             dataSet2::generateCoordinates();
             break;
         case 2:
-            // cout << "Enter the file name of the coordinates: ";
-            // string coordinatesFile;
-            // cin >> coordinatesFile;
             dataSet2::generateEdges("../../DatasetsSamples/Dataset2/coordinates.csv");
             break;
     }

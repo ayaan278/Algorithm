@@ -118,8 +118,5 @@ namespace dataSet2
 
     // Edges developer
     void generateEdges(string coordinatesFile);
-
-    // Reading CSV file
-
 }
 # endif
