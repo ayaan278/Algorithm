@@ -31,7 +31,7 @@ namespace dataSet1
         if (sortchoice)
         {
             MaxPriorityQueue<long long int> pq;
-            for (int i=0; i<inputVector.size(); i++)
+            for (auto& i : inputVector)
             {
                 pq.enqueue(i);
             }
@@ -39,14 +39,15 @@ namespace dataSet1
             outputfile.open(name, ios::out);
             while (pq.size() > 0)
             {
-            // cout << pq.dequeue() << "\t: ";
-            //    pq.print();
-            outputfile << pq.dequeue() << "," << endl;;
+                // cout << pq.dequeue() << "\t: ";
+                //    pq.print();
+                outputfile << pq.dequeue() << "," << endl;
             }
         }
-        else{
+        else
+        {
             MinPriorityQueue<long long int> pq;
-            for (int i=0; i<inputVector.size(); i++)
+            for (auto& i : inputVector)
             {
                 pq.enqueue(i);
             }
@@ -54,9 +55,7 @@ namespace dataSet1
             outputfile.open(name, ios::out);
             while (pq.size() > 0)
             {
-            // cout << pq.dequeue() << "\t: ";
-            //    pq.print();
-            outputfile << pq.dequeue() << "," << endl;;
+                outputfile << pq.dequeue() << "," << endl;;
             }
         }
         // end of heap sorting

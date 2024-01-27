@@ -5,14 +5,17 @@ template <typename T>
 class dataSet1::MinPriorityQueue
 {
     // vector to be the container of the priority queue
-    vector<int> A;
+    vector<T> A;
     // heapifying operation for enqueue
     void heapify_enqueue (int index)
-    { // used in heapify enqueue.
+    { 
+        // heapify min 
         if (index == 0) // if already at root.
             return;
+
         // get parent index
         int parent_index = (index - 1)/2;
+
         // swap element with its parent if parent is greater
         if(A[index] < A[parent_index])
         {
@@ -52,7 +55,8 @@ class dataSet1::MinPriorityQueue
         }
     }
     public:
-    void enqueue (T element) {
+    void enqueue (T element) 
+    {
         A.push_back (element);
         heapify_enqueue (A.size()-1); // start at last element.
     }
@@ -63,13 +67,9 @@ class dataSet1::MinPriorityQueue
         heapify_dequeue (0); // start at root.
         return removed_element;
     }
-    int size() {
-    return A.size();
-    }
-    void print() {
-    for (int i = 0; i < A.size(); i++)
-    cout << A[i] << " ";
-    cout << endl;
+    int size() 
+    {
+        return A.size();
     }
 };
 

@@ -22,8 +22,6 @@ void dataSet1::mergeSortSetup(int fileSize, bool ascending)
     vector<long long int> grandSet = CSVData(dataSource); // the data set
     vector<long long int> temp = CSVData(dataSource); // temporary data structure for sorting
 
-
-
     // noting the timeframe of the sorting process
     auto start = chrono::high_resolution_clock::now();
     // sorting function
@@ -36,10 +34,12 @@ void dataSet1::mergeSortSetup(int fileSize, bool ascending)
 
     // writing the data outcomes into 'csv' format
     string outputName;
-    if(ascending){
+    if(ascending)
+    {
         outputName = "../../Outputs/Question2/MergeSort" + to_string(fileSize) + "Ascending.csv";
     }
-    else{
+    else
+    {
         outputName = "../../Outputs/Question2/MergeSort" + to_string(fileSize) + "Descending.csv";
     }
     outputFile.open(outputName, ios::out);

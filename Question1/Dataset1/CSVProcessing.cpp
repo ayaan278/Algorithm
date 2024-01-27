@@ -30,7 +30,6 @@ int dataSet1::craftData( vector<int> values, int size)
         for (auto& i : values)
         {
             outputFile << i;
-            cout << i;
         }
         outputFile << "," << endl;
     }

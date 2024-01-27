@@ -6,8 +6,14 @@
 
 int main(){
     int size, ascending;
-    //TODO
-    //Correct the interface
+    cout<<"|------------------------------------------------------------------|"<<endl;
+    cout<<"|            This is the Merge sort                                |"<<endl;
+    cout<<"|------------------------------------------------------------------|"<<endl;
+    cout<<"| Enter 1 for Ascending Sorting                                    |"<<endl;
+    cout<<"| Enter 0 for Descending Sorting                                   |"<<endl;
+    cout<<"|------------------------------------------------------------------|"<<endl;
+    cin >> ascending; 
+
     cout<<"|------------------------------------------------------------------|"<<endl;
     cout<<"|            This is the Merge sort for existing Data files        |"<<endl;
     cout<<"|------------------------------------------------------------------|"<<endl;
@@ -16,21 +22,14 @@ int main(){
     cout<<"| Enter 3 to read Dataset-10000.csv                                |"<<endl;
     cout<<"| Enter 4 to read Dataset-100000.csv                               |"<<endl;
     cout<<"| Enter 5 to read Dataset-500000.csv                               |"<<endl;
-    cout<<"| Enter 0 to exit                                                  |"<<endl;
+    cout<<"| Enter any key to exit                                            |"<<endl;
     cout<<"|------------------------------------------------------------------|"<<endl;
 
     cin>>size;
 
-    cout<<"|------------------------------------------------------------------|"<<endl;
-    cout<<"|            Enter Choice                                          |"<<endl;
-    cout<<"|------------------------------------------------------------------|"<<endl;
-    cout<<"| Enter 1 for Ascending Sorting                                    |"<<endl;
-    cout<<"| Enter 0 for Descending Sorting                                   |"<<endl;
-    cout<<"| Enter x to exit                                                  |"<<endl;
-    cout<<"|------------------------------------------------------------------|"<<endl;
-    cin >> ascending; // not used yet
-
-    switch(size){
+  
+    switch(size)
+    {
         case 1:
             size = 100;
             dataSet1::mergeSortSetup(size, ascending);
@@ -55,6 +54,9 @@ int main(){
             size = 500000;
             dataSet1::mergeSortSetup(size, ascending);
             cout << "file have being successfully sorted" << endl;
+            break;
+        default:
+            cout << "Exiting..." << endl;
             break;
     }
 

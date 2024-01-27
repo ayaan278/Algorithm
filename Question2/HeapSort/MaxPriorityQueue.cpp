@@ -71,11 +71,4 @@ public:
     {
         return A.size();
     }
-    // print the elements of the priority queue
-    void print()
-    {
-        for (int i = 0; i < A.size(); i++)
-            cout << A[i] << " ";
-        cout << endl;
-    }
 };

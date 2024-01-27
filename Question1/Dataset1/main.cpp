@@ -14,6 +14,6 @@ int main()
     cout << "Enter the size of file" << endl;
     cin >> size;
     dataSet1::craftData(v1, size);
-    cout << "file have being successfully created" << endl;
+    cout << "File have being successfully created" << endl;
     return 0;
 }
