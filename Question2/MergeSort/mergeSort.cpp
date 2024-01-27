@@ -58,7 +58,9 @@ void dataSet1::mergeSortSetup(int fileSize, bool ascending)
     timeFile.close();
 }
 
-void dataSet1::merge(vector<long long>& grandSet, vector<long long>& temp, int p, int pivot, int r, bool acsending)
+void dataSet1::merge(vector<long long>& grandSet, 
+            vector<long long>& temp, 
+            int p, int pivot, int r, bool acsending)
 {
     // loading the elements into the temporary data structure(common script)
     int i, j;
@@ -93,7 +95,9 @@ void dataSet1::merge(vector<long long>& grandSet, vector<long long>& temp, int p
     }
 }
 
-void dataSet1::mergeSort(vector<long long int>& grandSet, vector<long long int>& temp, int p, int r, bool ascending)
+void dataSet1::mergeSort(vector<long long int>& grandSet, 
+            vector<long long int>& temp, 
+            int p, int r, bool ascending)
 {
     int pivot; // the point where we divide the original data set
 
