@@ -82,7 +82,7 @@ void dataSet2::generateCoordinates()
 
 void dataSet2::generateEdges(string coordinatesFile)
 {
-    string edgeFileName = "../../DatasetsSamples/Dataset2/edges-trial.csv";
+    string edgeFileName = "../../DatasetsSamples/Dataset2/edges.csv";
     fstream file;
     ifstream file2;
     file.open(edgeFileName, ios_base::out);
