@@ -45,7 +45,6 @@ namespace dataSet2
         int getYaxis();
         int getZaxis();
         Coordinate& getCoordinate();
-        void getData(); // no meaningful use, for testing purposes only
     };
 
     // Node-related decorations
@@ -56,19 +55,17 @@ namespace dataSet2
         inline static int _NUM_OF_NODES_;
         char name;
         Coordinate position;
-        int degree, profit;
+        int weight, profit;
 
     public:
         Node();
-        Node(char name, int x, int y, int z, int profit, int degree);
+        Node(char name, int x, int y, int z, int profit, int weight);
         static int getTotalNum();
         char getName() const;
         int getDegree();
         int getProfit();
         Coordinate getCoordinate() const;
-        void calculateDegree();
 
-        void getData(); // no meaningful use, for testing purposes only
         friend void dataSet2::initialization(string fileName); // friendship for facilitating accessability
     };
 
