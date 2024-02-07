@@ -59,7 +59,7 @@ char dataSet2::mapping(map<int, char>& instance, int n)
 void dataSet2::initialization(string fileName)
 {
     fstream file;
-    file.open(fileName, ios_base::app);
+    file.open(fileName, ios_base::out);
     for(int i=0; i<Node::getTotalNum(); i++){
         Node newNode;
         file << newNode.getName() << "," << to_string(newNode.position.getXaxis()) 
@@ -74,7 +74,7 @@ void dataSet2::generateCoordinates()
 {
     dataSet2::alphabeticOrder;
     dataSet2::setMap(alphabeticOrder);
-    string fileName = "coordinates.csv";
+    string fileName = "../../Dataset/Dataset2/coordinates.csv";
     dataSet2::initialization(fileName);
 
 }
